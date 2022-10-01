@@ -8,7 +8,6 @@ function App() {
     <br/>
     <br/>
     <AddReservation/>
-    <ShowReservations/>
   </div>;
 }
 
