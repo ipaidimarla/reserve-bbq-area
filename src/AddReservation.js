@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { faker } from "@faker-js/faker";
 
 export const AddReservation = () => {
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState({ message: "", type: "" });
   const [users, setUsers] = useState([]);
   const fetchUsers = async () => {
     await axios
@@ -70,6 +70,7 @@ export const AddReservation = () => {
   };
 
   const submitReservation = (e) => {
+    let isTimeOverlapse = false;
     e.preventDefault();
     users.map((user) => {
       if (user.date === reservation.date) {
@@ -81,25 +82,49 @@ export const AddReservation = () => {
           alert(
             `Sorry, time window already taken or there is an overlap.${user.name} from unit ${user.unit} has taken this slot. try a different timw window`
           );
+          isTimeOverlapse = true;
           return;
         }
       }
     });
+    if (isTimeOverlapse) {
+      showReservationStatus({
+        message: "There is an error in making the reservation",
+        type: "error",
+      });
+      return;
+    }
     axios
       .post(
         "https://reserve-bbq-area-api.herokuapp.com/makereservation",
         reservation
       )
       .then((res) => {
-        setUsers([...users, reservation]);
-        setStatus("Succesfully reserved the BBQ area");
-        setTimeout(() => {
-          setStatus("");
-        }, 5000);
+        setUsers(
+          [...users, reservation].sort(
+            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+          )
+        );
+        showReservationStatus({
+          message: "Succesfully reserved the BBQ area",
+          type: "success",
+        });
       })
       .catch((err) => {
-        setStatus("There is an error in making the reservation");
+        showReservationStatus({
+          message: "There is an error in making the reservation",
+          type: "error",
+        });
       });
+  };
+  const showReservationStatus = (status) => {
+    setStatus({
+      message: status.message,
+      type: status.type,
+    });
+    setTimeout(() => {
+      setStatus({});
+    }, 5000);
   };
   const setValuesForreservation = (e) => {
     const name = e.target.name;
@@ -172,7 +197,11 @@ export const AddReservation = () => {
             Make reservation
           </button>
         </form>
-        <div style={{ backgroundColor: "teal" }}>{status}</div>
+        <div
+          style={{ backgroundColor: status.type === "error" ? "red" : "teal" }}
+        >
+          {status.message}
+        </div>
       </article>
       <h3>Upcoming Reservations</h3>
       <ul className="users">
