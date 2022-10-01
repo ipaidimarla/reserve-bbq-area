@@ -109,6 +109,13 @@ export const AddReservation = () => {
           message: "Succesfully reserved the BBQ area",
           type: "success",
         });
+        setReservation({
+          name: "",
+          unit: "",
+          date: "",
+          timeFrom: "",
+          timeTo: "",
+        });
       })
       .catch((err) => {
         showReservationStatus({
