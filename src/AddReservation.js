@@ -266,6 +266,23 @@ export const AddReservation = () => {
           );
         })}
       </ul>
+      <article>
+        <section>
+          <div className="text-area">
+            <textarea
+              className="modify-reservation"
+              placeholder="Want to cancel or update a reservation? Write here and submit"
+            ></textarea>
+            <button
+              style={{ marginTop: "6px", marginBottom: "1rem" }}
+              className="btn"
+              type="button"
+            >
+              Submit
+            </button>
+          </div>
+        </section>
+      </article>
     </>
   );
 };

@@ -365,3 +365,15 @@ p {
   text-transform: capitalize;
   cursor: pointer;
 }
+.modify-reservation{
+  width: 40%;
+  height:5rem;
+  align-content: center;
+  text-align: center;
+  padding: 0.5rem;
+}
+.text-area{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
