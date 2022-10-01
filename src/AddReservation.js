@@ -90,7 +90,7 @@ export const AddReservation = () => {
         ];
         if (isOverlapping(timeWindow)) {
           alert(
-            `Sorry, time window already taken or there is an overlap.${user.name} from unit ${user.unit} has taken this slot. try a different timw window`
+            `Sorry, this time window is already taken or there is an overlap. ${user.name} from unit ${user.unit} has taken this slot. Try a different time window or a different date`
           );
           isTimeOverlapse = true;
           return;
