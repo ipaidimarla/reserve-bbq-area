@@ -213,10 +213,10 @@ export const AddReservation = () => {
                 src={`https://source.unsplash.com/random/200x200?sig=${index}`}
               />
               <div>
-                <h4>
+                <span>
                   {name}, Unit : {unit}{" "}
-                </h4>
-                <h4 style={{ marginTop: ".5rem " }}>  
+                </span>
+                <h4>  
                   {new Date(date).toLocaleDateString("en-us", {
                     weekday: "short",
                     year: "numeric",
