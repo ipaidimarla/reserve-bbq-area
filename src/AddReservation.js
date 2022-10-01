@@ -135,6 +135,20 @@ export const AddReservation = () => {
         });
       });
   };
+  const formatAMPM = (timeString) => {
+    timeString = timeString.split(":");
+    let hours = timeString[0];
+    let minutes = timeString[1];
+    const ampm = hours >= 12 ? "pm" : "am";
+
+    hours %= 12;
+    hours = hours || 12;
+    minutes = minutes < 10 ? `${minutes}` : minutes;
+
+    const strTime = `${hours}:${minutes} ${ampm}`;
+
+    return strTime;
+  };
   const showReservationStatus = (status) => {
     setStatus({
       message: status.message,
@@ -245,7 +259,7 @@ export const AddReservation = () => {
                   })}
                 </h4>
                 <span>
-                  {timeFrom} to {timeTo}
+                  {formatAMPM(timeFrom)} - {formatAMPM(timeTo)}
                 </span>
               </div>
               <div></div>
