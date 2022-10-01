@@ -41,13 +41,6 @@ export const AddReservation = () => {
     fetchUsers();
   }, []);
 
-  const max =
-    maxDate.getFullYear() +
-    "-" +
-    maxDate.getMonth() +
-    1 +
-    "-" +
-    maxDate.getDay();
   const [reservation, setReservation] = useState({
     name: "",
     unit: "",
@@ -144,13 +137,13 @@ export const AddReservation = () => {
         </form>
         <div>{status}</div>
       </article>
-      <h3>Reservations</h3>
+      <h3>Upcoming Reservations</h3>
       <ul className="users">
-        {users.map((user) => {
+        {users.map((user, index) => {
           const { id, name, date, unit, timeFrom, timeTo } = user;
           return (
             <li key={id}>
-              <img src={faker.internet.avatar()} />
+              <img src={`https://source.unsplash.com/random/200x200?sig=${index}`}/>
               <div>
                 <h4>
                   {name}, Unit : {unit}{" "}
