@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { faker } from "@faker-js/faker";
 
 export const AddReservation = () => {
-  const [maxDate, setMaxdate] = useState(new Date());
   const [status, setStatus] = useState("");
   const [users, setUsers] = useState([]);
   const fetchUsers = async () => {
@@ -48,9 +47,44 @@ export const AddReservation = () => {
     timeFrom: 0,
     timeTo: 0,
   });
+  const overlapping = (a, b) => {
+    const getMinutes = (s) => {
+      const p = s.split(":").map(Number);
+      return p[0] * 60 + p[1];
+    };
+    return (
+      getMinutes(a.end) > getMinutes(b.start) &&
+      getMinutes(b.end) > getMinutes(a.start)
+    );
+  };
+  const isOverlapping = (arr) => {
+    let i, j;
+    for (i = 0; i < arr.length - 1; i++) {
+      for (j = i + 1; j < arr.length; j++) {
+        if (overlapping(arr[i], arr[j])) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
 
   const submitReservation = (e) => {
     e.preventDefault();
+    users.map((user) => {
+      if (user.date === reservation.date) {
+        const timeWindow = [
+          { start: user.timeFrom, end: user.timeTo },
+          { start: reservation.timeFrom, end: reservation.timeTo },
+        ];
+        if (isOverlapping(timeWindow)) {
+          alert(
+            `Sorry, time window already taken or there is an overlap.${user.name} from unit ${user.unit} has taken this slot. try a different timw window`
+          );
+          return;
+        }
+      }
+    });
     axios
       .post(
         "https://reserve-bbq-area-api.herokuapp.com/makereservation",
@@ -59,6 +93,9 @@ export const AddReservation = () => {
       .then((res) => {
         setUsers([...users, reservation]);
         setStatus("Succesfully reserved the BBQ area");
+        setTimeout(() => {
+          setStatus("");
+        }, 5000);
       })
       .catch((err) => {
         setStatus("There is an error in making the reservation");
@@ -135,7 +172,7 @@ export const AddReservation = () => {
             Make reservation
           </button>
         </form>
-        <div>{status}</div>
+        <div style={{ backgroundColor: "teal" }}>{status}</div>
       </article>
       <h3>Upcoming Reservations</h3>
       <ul className="users">
@@ -143,7 +180,9 @@ export const AddReservation = () => {
           const { id, name, date, unit, timeFrom, timeTo } = user;
           return (
             <li key={id}>
-              <img src={`https://source.unsplash.com/random/200x200?sig=${index}`}/>
+              <img
+                src={`https://source.unsplash.com/random/200x200?sig=${index}`}
+              />
               <div>
                 <h4>
                   {name}, Unit : {unit}{" "}

@@ -8,6 +8,10 @@ function App() {
     <br/>
     <br/>
     <AddReservation/>
+    <footer>
+      <i>Developed by Madhan Paidimarla</i>
+    </footer>
+    <br/>
   </div>;
 }
 
