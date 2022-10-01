@@ -4,6 +4,10 @@ import React, { useState, useEffect } from "react";
 export const AddReservation = () => {
   const [status, setStatus] = useState({ message: "", type: "" });
   const [users, setUsers] = useState([]);
+  const max = new Date(new Date().getTime() + 60 * 24 * 60 * 60 * 1000)
+    .toISOString()
+    .split("T")[0];
+  const min = new Date().toISOString().split("T")[0];
   const fetchUsers = async () => {
     await axios
       .get("https://reserve-bbq-area-api.herokuapp.com/getreservations")
@@ -197,6 +201,8 @@ export const AddReservation = () => {
               id="date"
               name="date"
               required
+              max={max}
+              min={min}
               value={reservation.date}
               onChange={setValuesForreservation}
             ></input>
