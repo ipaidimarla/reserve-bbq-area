@@ -313,7 +313,7 @@ p {
   margin-bottom: 0.15rem;
 }
 
-.users a {
+.users span {
   color: var(--clr-grey-5);
   text-transform: capitalize;
 }

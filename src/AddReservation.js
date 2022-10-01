@@ -14,7 +14,11 @@ export const AddReservation = () => {
         const futureReservations = await data.filter((f) =>
           filterPastReservations(f)
         );
-        setUsers(futureReservations);
+        setUsers(
+          futureReservations.sort(
+            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+          )
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -78,9 +82,7 @@ export const AddReservation = () => {
       <article>
         <form className="form" onSubmit={submitReservation}>
           <div className="form-control">
-            <label htmlFor="name" className="">
-              Name :
-            </label>
+            <label htmlFor="name">Name :</label>
             <input
               type="text"
               id="name"
@@ -91,9 +93,7 @@ export const AddReservation = () => {
             ></input>
           </div>
           <div className="form-control">
-            <label htmlFor="unit" className="">
-              Unit :
-            </label>
+            <label htmlFor="unit">Unit :</label>
             <input
               type="text"
               id="unit"
@@ -105,9 +105,7 @@ export const AddReservation = () => {
           </div>
 
           <div className="form-control">
-            <label htmlFor="date" className="">
-              Date :
-            </label>
+            <label htmlFor="date">Date :</label>
             <input
               type="date"
               id="date"
@@ -118,9 +116,7 @@ export const AddReservation = () => {
             ></input>
           </div>
           <div className="form-control">
-            <label htmlFor="timeFrom" className="">
-              Time from :
-            </label>
+            <label htmlFor="timeFrom">Time from :</label>
 
             <input
               type="time"
@@ -132,9 +128,7 @@ export const AddReservation = () => {
             ></input>
           </div>
           <div className="form-control">
-            <label htmlFor="timeTo" className="">
-              Time to :
-            </label>
+            <label htmlFor="timeTo">Time to :</label>
             <input
               type="time"
               id="timeTo"
@@ -162,7 +156,9 @@ export const AddReservation = () => {
                   {name}, Unit : {unit}{" "}
                 </h4>
                 <h4>{date}</h4>
-                {timeFrom} to {timeTo}
+                <span>
+                  {timeFrom} to {timeTo}
+                </span>
               </div>
               <div></div>
             </li>
