@@ -1,5 +1,4 @@
 import { AddReservation } from "./AddReservation";
-import ShowReservations from "./ShowReservations";
 
 function App() {
   return <div className="container">
