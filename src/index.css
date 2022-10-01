@@ -321,6 +321,9 @@ p {
 .users span {
   color: var(--clr-grey-5);
 }
+.users span:not(.ampm) {
+  text-transform: capitalize;
+}
 
 .products {
   margin: 4rem 0;

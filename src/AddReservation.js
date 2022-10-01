@@ -258,7 +258,7 @@ export const AddReservation = () => {
                     day: "numeric",
                   })}
                 </h4>
-                <span>
+                <span className="ampm">
                   {formatAMPM(timeFrom)} - {formatAMPM(timeTo)}
                 </span>
               </div>
