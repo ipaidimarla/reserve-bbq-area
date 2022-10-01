@@ -216,7 +216,14 @@ export const AddReservation = () => {
                 <h4>
                   {name}, Unit : {unit}{" "}
                 </h4>
-                <h4>{date}</h4>
+                <h4 style={{ marginTop: ".5rem " }}>  
+                  {new Date(date).toLocaleDateString("en-us", {
+                    weekday: "short",
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </h4>
                 <span>
                   {timeFrom} to {timeTo}
                 </span>
