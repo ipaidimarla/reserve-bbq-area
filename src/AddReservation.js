@@ -69,9 +69,20 @@ export const AddReservation = () => {
     return false;
   };
 
+  const isTimeValid = () => {
+    const getMinutes = (s) => {
+      const p = s.split(":").map(Number);
+      return p[0] * 60 + p[1];
+    };
+    return getMinutes(reservation.timeFrom) < getMinutes(reservation.timeTo);
+  };
   const submitReservation = (e) => {
     let isTimeOverlapse = false;
     e.preventDefault();
+    if (!isTimeValid()) {
+      alert("Start time is later than end time.");
+      return;
+    }
     users.map((user) => {
       if (user.date === reservation.date) {
         const timeWindow = [
