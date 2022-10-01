@@ -206,7 +206,9 @@ export const AddReservation = () => {
       <h3>Upcoming Reservations</h3>
       <ul className="users">
         {users.map((user, index) => {
-          const { id, name, date, unit, timeFrom, timeTo } = user;
+          const { id, name, unit, timeFrom, timeTo } = user;
+          let date = new Date(user.date);
+          date.setDate(date.getDate() + 1);
           return (
             <li key={id}>
               <img
@@ -216,7 +218,7 @@ export const AddReservation = () => {
                 <span>
                   {name}, Unit : {unit}{" "}
                 </span>
-                <h4>  
+                <h4>
                   {new Date(date).toLocaleDateString("en-us", {
                     weekday: "short",
                     year: "numeric",
