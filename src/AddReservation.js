@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { faker } from "@faker-js/faker";
 
 export const AddReservation = () => {
   const [status, setStatus] = useState({ message: "", type: "" });
