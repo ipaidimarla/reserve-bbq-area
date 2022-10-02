@@ -7,7 +7,6 @@ export const AddReservation = () => {
   const max = new Date(new Date().getTime() + 60 * 24 * 60 * 60 * 1000)
     .toISOString()
     .split("T")[0];
-  const min = new Date().toISOString().split("T")[0];
   const fetchUsers = async () => {
     await axios
       .get("https://reserve-bbq-area-api.herokuapp.com/getreservations")
@@ -28,6 +27,7 @@ export const AddReservation = () => {
   };
   const filterPastReservations = (f) => {
     const today = new Date();
+     today.setDate(today.getDate() - 1);
     const date = new Date(f.date);
     if (today.getTime() <= date.getTime()) {
       return true;
@@ -202,7 +202,7 @@ export const AddReservation = () => {
               name="date"
               required
               max={max}
-              min={min}
+             
               value={reservation.date}
               onChange={setValuesForreservation}
             ></input>
