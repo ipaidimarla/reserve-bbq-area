@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useReservationsContext } from "../hooks/useReservationsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { PROD_RES_URL, PROD_USER_URL } from "../utils/URLs";
 
 const ReservationForm = () => {
   const { reservations, dispatch } = useReservationsContext();
+  const { reservationFromDetail, dispatch: reservationDispatch } =
+    useReservationsContext();
   const [error, setError] = useState();
   const { user } = useAuthContext();
   const max = new Date(new Date().getTime() + 60 * 24 * 60 * 60 * 1000)
     .toISOString()
     .split("T")[0];
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [reservation, setReservation] = useState({
     name: "",
@@ -190,6 +195,7 @@ const ReservationForm = () => {
           <button type="submit" className="btn">
             Make reservation
           </button>
+         
         </form>
         <div style={{ color: "red" }}>{error}</div>
       </article>

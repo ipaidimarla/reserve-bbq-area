@@ -18,6 +18,10 @@ export const reservationsReducer = (state, action) => {
           (r) => r._id !== action.payload._id
         ),
       };
+    case "SET_RESERVATION":
+     return {
+       reservations: action.payload,
+     };
     default:
       return state;
   }

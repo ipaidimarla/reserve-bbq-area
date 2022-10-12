@@ -51,7 +51,11 @@ const Home = () => {
   return (
     <>
       <ReservationForm />
-      <h3>Upcoming Reservations</h3>
+      <h3>
+        {reservations && reservations.lenth > 0
+          ? "Upcoming Reservations"
+          : "There are no upcoming reservations"}
+      </h3>
       <ul className="users">
         {reservations &&
           reservations.map((reservation, index) => {

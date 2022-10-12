@@ -14,13 +14,13 @@ const Navbar = () => {
     <>
       <header>
         <h4>Villages @ Cupertino</h4>
-        <Link to="/">
+        
           <h2>
             <span className="material-symbols-outlined">outdoor_grill</span>BBQ
             Area Reservations
             <span className="material-symbols-outlined">outdoor_grill</span>
           </h2>
-        </Link>
+ 
 
         <nav>
           {user && (

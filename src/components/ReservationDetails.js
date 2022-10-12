@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useReservationsContext } from "../hooks/useReservationsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { PROD_RES_URL, PROD_USER_URL } from "../utils/URLs";
+import ReservationForm from "./ReservationForm";
 
 const ReservationDetails = (props) => {
   const { reservation, index } = props;
   const { user } = useAuthContext();
   const { state, dispatch } = useReservationsContext();
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const formatAMPM = (timeString) => {
     timeString = timeString.split(":");
     let hours = timeString[0];
@@ -26,9 +31,9 @@ const ReservationDetails = (props) => {
   const { _id, name, unit, timeFrom, timeTo, user_id } = reservation;
   let date = new Date(reservation.date);
   date.setDate(date.getDate() + 1);
-  const modifyReservation = (id) => {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+
+  const modifyReservation = () => {
+    dispatch({ type: "SEt_RESERVATION", payload: reservation });
   };
   const deleteReservation = (id) => {
     if (!user) {

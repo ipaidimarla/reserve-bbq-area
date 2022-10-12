@@ -33,6 +33,11 @@ function App() {
             />
           </Routes>
         </div>
+        <br />
+        <footer>
+          Developed by <i>Madhan Paidimarla</i>
+        </footer>
+        <br />
       </BrowserRouter>
     </div>
   );
