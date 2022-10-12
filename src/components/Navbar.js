@@ -16,8 +16,8 @@ const Navbar = () => {
         <h4>Villages @ Cupertino</h4>
         <Link to="/">
           <h2>
-            <span className="material-symbols-outlined">outdoor_grill</span>BBQ Area
-            Reservations
+            <span className="material-symbols-outlined">outdoor_grill</span>BBQ
+            Area Reservations
             <span className="material-symbols-outlined">outdoor_grill</span>
           </h2>
         </Link>
@@ -26,21 +26,25 @@ const Navbar = () => {
           {user && (
             <div style={{ padding: "1%" }}>
               <span>
-                <i>You logged in as : </i>
-                {user.email}
+                Logged in as :<i>{" " + user.email} </i>
               </span>
-              <button type="button" className="btn" onClick={logoutHandler}>
+              <button
+                style={{ marginBottom: "1%" }}
+                type="button"
+                className="btn"
+                onClick={logoutHandler}
+              >
                 Logout
               </button>
             </div>
           )}
           {!user && (
             <div>
-              <Link  style={{ padding: "1%" }} to="/login">
+              <Link style={{ padding: "1%" }} to="/login">
                 Login
               </Link>
               or
-              <Link className="btn"  to="/signup">
+              <Link className="btn" to="/signup">
                 Signup
               </Link>
             </div>
