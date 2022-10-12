@@ -3,7 +3,7 @@
 Variables
 ===============
 */
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 :root {
   /* dark shades of primary color*/
   --clr-primary-1: hsl(205, 86%, 17%);
@@ -70,8 +70,7 @@ Global Styles
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Helvetica Neue', sans-serif;
   background: var(--clr-grey-10);
   color: var(--clr-grey-1);
   line-height: 1.5;
@@ -259,23 +258,21 @@ p {
   grid-template-columns: 100px 1fr;
   align-items: center;
 }
-.form label{
-  display:inline-block;
-  text-align: right;
-  margin-right: 1rem;
-}
 
 .form button {
   display: inline-block;
-  background: var(--clr-black);
+  background: var(--clr-primary-5);
   color: var(--clr-white);
   border-color: transparent;
   margin-top: 1rem;
   letter-spacing: var(--spacing);
-  padding: 0.15rem 0.25rem;
+  padding:  0.25rem;
   text-transform: capitalize;
   border-radius: var(--radius);
   cursor: pointer;
+}
+.nav{
+  padding:20px;
 }
 
 .nav-links {
@@ -306,6 +303,13 @@ p {
   border-radius: var(--radius);
   text-align: left;
 }
+.users li span{
+  color:hsl(186, 40%, 27%);
+  
+}
+.users li span:not(.ampm) {
+text-transform: capitalize;
+}
 
 .users img {
   width: 50px;
@@ -318,10 +322,8 @@ p {
   margin-bottom: 0.15rem;
 }
 
-.users span {
+.users a {
   color: var(--clr-grey-5);
-}
-.users span:not(.ampm) {
   text-transform: capitalize;
 }
 
@@ -365,15 +367,21 @@ p {
   text-transform: capitalize;
   cursor: pointer;
 }
-.modify-reservation{
+modify-reservation {
   width: 40%;
-  height:5rem;
+  height: 5rem;
   align-content: center;
   text-align: center;
   padding: 0.5rem;
 }
-.text-area{
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+
+.icon:hover {
+  cursor: pointer;
+}
+
+.icon {
+  position: relative;
+  top: 0;
+  padding: 4px;
+  right: -20%;
 }

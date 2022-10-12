@@ -1,17 +1,41 @@
-import { AddReservation } from "./AddReservation";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Switch,
+  Navigate,
+} from "react-router-dom";
+import { useAuthContext } from "./hooks/useAuthContext";
+import Home from "./pages/Home";
+import Signup from "./pages/Singup";
+import Login from "./pages/Login";
 
+import Navbar from "./components/Navbar";
 function App() {
-  return <div className="container">
-    <h2>BBQ Area Reservation</h2>
-    <h4>Make reservations for BBQ area @ Villages - Cupertino</h4>
-    <br/>
-    <br/>
-    <AddReservation/>
-    <footer>
-      <i>Developed by Madhan Paidimarla</i>
-    </footer>
-    <br/>
-  </div>;
+  const { user } = useAuthContext();
+  return (
+    <div className="container">
+      <BrowserRouter>
+        <Navbar />
+        <div className="pages">
+          <Routes>
+            <Route
+              path="/"
+              element={user ? <Home /> : <Navigate to="login" />}
+            />
+            <Route
+              path="/login"
+              element={!user ? <Login /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/signup"
+              element={!user ? <Signup /> : <Navigate to="/" />}
+            />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
